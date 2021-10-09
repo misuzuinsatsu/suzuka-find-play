@@ -47,6 +47,12 @@ class SentencesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'subject' => 'required|max:255',
+            'particle' => 'required|max:10',
+            'object' => 'required|max:255',
+        ]);
+
         $sentence = new Sentence;
         $sentence->subject = $request->subject;
         $sentence->particle = $request->particle;
@@ -95,6 +101,12 @@ class SentencesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'subject' => 'required|max:255',
+            'particle' => 'required|max:10',
+            'object' => 'required|max:255',
+        ]);
+
         $sentence = Sentence::find($id);
         $sentence->subject = $request->subject;
         $sentence->particle = $request->particle;
