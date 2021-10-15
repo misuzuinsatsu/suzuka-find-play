@@ -14,4 +14,7 @@
 Route::get('/', function(){
     return view('welcome');
 });
+Route::get('play','SentencesController@play');
+Route::get('answer','SentencesController@answer')->name('answer');
+Route::get('result','SentencesController@result')->name('result');
 Route::resource('sentences','SentencesController');

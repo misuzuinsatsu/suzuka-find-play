@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Sentence;
+use App\Result;
 
 class SentencesController extends Controller
 {
@@ -50,12 +51,14 @@ class SentencesController extends Controller
         $this->validate($request,[
             'subject' => 'required|max:255',
             'particle' => 'required|max:10',
+            'error' => 'required|max:10',
             'object' => 'required|max:255',
         ]);
 
         $sentence = new Sentence;
         $sentence->subject = $request->subject;
         $sentence->particle = $request->particle;
+        $sentence->error = $request->error;
         $sentence->object = $request->object;
         $sentence->save();
 
@@ -104,12 +107,14 @@ class SentencesController extends Controller
         $this->validate($request,[
             'subject' => 'required|max:255',
             'particle' => 'required|max:10',
+            'error' => 'required|max:10',
             'object' => 'required|max:255',
         ]);
 
         $sentence = Sentence::find($id);
         $sentence->subject = $request->subject;
         $sentence->particle = $request->particle;
+        $sentence->error = $request->error;
         $sentence->object = $request->object;
         $sentence->save();
 
@@ -128,5 +133,49 @@ class SentencesController extends Controller
         $sentence->delete();
 
         return redirect('sentences');
+    }
+
+
+    public function play()
+    {
+        $questions = Sentence::all();
+        $count = Sentence::count();
+        $rand = mt_rand(0,$count-1);
+        $id = $questions[$rand]->id;
+        $sentence = Sentence::find($id);
+        $results = Result::all();
+        
+        return view('play',[
+            'sentence'=>$sentence,
+            'results' => $results,
+        ]);
+
+
+    }
+    public function answer()
+    {
+
+        $answer = Result::find($_GET['count']);
+        $answer->result = $_GET['answer'];
+        $answer->save();
+
+        if($_GET['count']<5){
+            return redirect('play');
+        } else {
+            return redirect('result');
+        }
+        
+        
+        
+    }
+    public function result()
+    {
+        $results = Result::all();
+
+        return view('result',[
+            'results' => $results,
+        ]);
+
+
     }
 }

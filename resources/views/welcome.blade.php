@@ -2,14 +2,12 @@
 
 @section('content')
 
-<h1>ことばのあそびば</h1>
-
 <div id="start">
-    <a href="#">あそぶ？</a>
+    <a href="play" class="btn btn-danger btn-lg "><span class="fa fa-play"></span>あそぶ？</a>
 </div>
 
 <div id="menu">
-    <a href="sentences">保護者メニュー</a>
+    <a href="sentences" class="btn btn-primary"><span class="fa fa-user"></span>保護者メニュー</a>
 </div>
 
 @endsection
