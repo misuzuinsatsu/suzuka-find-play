@@ -13,6 +13,7 @@
                 <th>助詞</th>
                 <th>間違い</th>
                 <th>目的語</th>
+                <th>画像</th>
                 <th></th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                     <td>{{ $sentence->particle }}</td>
                     <td>{{ $sentence->error }}</td>
                     <td>{{ $sentence->object }}</td>
+                    <td>{{ $sentence->image }}</td>
                     <td>{!! link_to_route('sentences.edit','編集',['id'=>$sentence->id],['class'=>'btn btn-primary']) !!}</td>
                 </tr>
             @endforeach

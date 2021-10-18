@@ -3,6 +3,7 @@
 @section('content')
 
 <h1>id={{ $sentence->id }}の問題詳細</h1>
+<img src="{{ asset('images/') }}/{{ $sentence->image }}" width="200px",height="200px">
 <table class="table table-striped">
     <thead>
         <tr>

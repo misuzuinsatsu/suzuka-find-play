@@ -7,11 +7,14 @@
 html {
     margin:0;
     padding:0;
+
 }
 
 body {
     margin:0;
     padding:0;
+    
+
 }
 
 header {
@@ -29,7 +32,7 @@ a , a:hover {
     text-decoration: none;
 }
 header h1 a {
-    color:#98DDCA;
+    color:#808080;
     line-height:100px;
 }
 .container {
@@ -37,6 +40,7 @@ header h1 a {
     max-width:600px;
     margin:0 auto;
     text-align:center;
+    
 }
 .fa {
     margin-right:10px;
@@ -70,7 +74,7 @@ td {
     border:1px solid #98DDCA;
 }
 .play p {
-    font-size:30px;
+    font-size:25px;
     margin:30px;
     color:#FFAAA7
 }
@@ -105,4 +109,19 @@ td {
     position:relative;
     top:5px;
 }
+figure img {
+    display:block;
+    width:200px;
+    height:200px;
+    margin:auto;
+    line-height:200px;
+}
 
+.red {
+    color:red;
+}
+ul {
+    list-style:none;
+    text-align:left;
+    margin-left:30%;
+}

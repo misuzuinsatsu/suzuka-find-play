@@ -53,13 +53,23 @@ class SentencesController extends Controller
             'particle' => 'required|max:10',
             'error' => 'required|max:10',
             'object' => 'required|max:255',
+            'image' => 'image'
         ]);
+
+        if($file = $request->image) {
+            $fileName = $file->getClientOriginalName();
+            $target_path = public_path('images/');
+            $file->move($target_path,$fileName);
+        } else {
+            $fileName="noimage.png";
+        }
 
         $sentence = new Sentence;
         $sentence->subject = $request->subject;
         $sentence->particle = $request->particle;
         $sentence->error = $request->error;
         $sentence->object = $request->object;
+        $sentence->image = $fileName;
         $sentence->save();
 
         return redirect('sentences');
@@ -95,6 +105,15 @@ class SentencesController extends Controller
         ]);
     }
 
+    public function edit_image($id)
+    {
+        $sentence = Sentence::find($id);
+
+        return view('sentences.edit_image',[
+            'sentence' => $sentence,
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -109,13 +128,26 @@ class SentencesController extends Controller
             'particle' => 'required|max:10',
             'error' => 'required|max:10',
             'object' => 'required|max:255',
+            'image' => 'image',
         ]);
+
+        if($file = $request->image) {
+            $fileName = $file->getClientOriginalName();
+            $target_path = public_path('images/');
+            $file->move($target_path,$fileName);
+        } else {
+            $fileName="noimage.png";
+        }
 
         $sentence = Sentence::find($id);
         $sentence->subject = $request->subject;
         $sentence->particle = $request->particle;
         $sentence->error = $request->error;
         $sentence->object = $request->object;
+        if($fileName!=""){
+            $sentence->image = $fileName;
+        }
+        
         $sentence->save();
 
         return redirect('sentences');
@@ -157,6 +189,7 @@ class SentencesController extends Controller
 
         $answer = Result::find($_GET['count']);
         $answer->result = $_GET['answer'];
+        $answer->question = $_GET['question'];
         $answer->save();
 
         if($_GET['count']<5){
