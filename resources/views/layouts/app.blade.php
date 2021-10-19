@@ -15,7 +15,7 @@
     <body>
         @include('commons.error_messages')
         <header>
-            <h1 class="text-center"><a href="/">ことばのあそびば</a></h1>
+            <h1 class="text-center"><a href="/"><img src="{{ asset('images/logo.png') }}" alt="ことばのあそびば"></a></h1>
         </header>
         <div class="container">
     
